@@ -2,7 +2,7 @@
 
 ## Description
 
-A cloned application of crypto trading platform that functions exactly as a crypto trading.
+Survey Applications
 
 ## User Stories
 
