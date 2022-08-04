@@ -1,14 +1,15 @@
 import { React, useState } from "react";
+import Question from "./Question";
 
 const Form = ({ changeCreateForm }) => {
-  const [submit, changeSubmit] = useState(true);
-
+  //FUNCTIONS
   //handleSubmit function
   const handleSubmit = (event) => {
     event.preventDefault();
     changeCreateForm();
   };
 
+  //RETURN
   return (
     <form onSubmit={handleSubmit}>
       <label>
@@ -19,18 +20,11 @@ const Form = ({ changeCreateForm }) => {
         Description
         <input type="text" name="description" />
       </label>
-      <div>
-        <p>ADD A Question</p>
-        <label>
-          Question
-          <input type="text" name="question" />
-        </label>
-        <button>Add a Question</button>
-      </div>
-
-      <input type="submit" value="Submit" />
+      <Question />
+      <button type="submit">Submit</button>
     </form>
   );
 };
 
+//EXPORT
 export default Form;
