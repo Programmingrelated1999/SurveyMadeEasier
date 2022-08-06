@@ -1,7 +1,12 @@
 import React from "react";
+import { Rating } from "@mui/material";
 
 const Review = () => {
-  return <p>Review</p>;
+  return (
+    <div>
+      <Rating name="simple-controlled" disabled />
+    </div>
+  );
 };
 
 export default Review;

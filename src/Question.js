@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import AgreeDisagree from "./question_types/AgreeDisagree";
 import Review from "./question_types/Review";
 import MultipleChoice from "./question_types/MultipleChoice";
@@ -7,30 +7,10 @@ import Text from "./question_types/Text";
 //QUESTION TYPE
 const Question = () => {
   const [question, setQuestion] = useState("text");
-  const [multipleChoice, setMultipleChoice] = useState(false);
-  const [review, setReview] = useState(false);
-  const [agreeDisagree, setAgreeDisagree] = useState(false);
-  const [text, setText] = useState(false);
-
-  //every time page renders, set the questions based on the question type
-  useEffect(() => {
-    question === "text" ? setText(true) : setText(false);
-    question === "multiple_choice"
-      ? setMultipleChoice(true)
-      : setMultipleChoice(false);
-    question === "review" ? setReview(true) : setReview(false);
-    question === "agree_disagree"
-      ? setAgreeDisagree(true)
-      : setAgreeDisagree(false);
-  });
 
   //on submit change everything back to false
   const handleSubmit = (event) => {
     event.preventDefault();
-    setText(false);
-    setAgreeDisagree(false);
-    setMultipleChoice(false);
-    setReview(false);
   };
 
   //set question type for checking condition in rendering the questions set up
@@ -38,6 +18,9 @@ const Question = () => {
     setQuestion(event.target.value);
   };
 
+  //RETURN STATEMENT
+  //based on the select dropdown, set the question to question type
+  //based on the question, render question type components
   return (
     <div className="question">
       Question
@@ -48,13 +31,13 @@ const Question = () => {
         <option value="agree_disagree">Agree/Disagree</option>
         <option value="review">Review</option>
       </select>
+      {question === "text" ? <Text /> : null}
+      {question === "multiple_choice" ? <MultipleChoice /> : null}
+      {question === "agree_disagree" ? <AgreeDisagree /> : null}
+      {question === "review" ? <Review /> : null}
       <button type="button" onClick={handleSubmit}>
         Add Another Question
       </button>
-      {agreeDisagree && <AgreeDisagree />}
-      {multipleChoice && <MultipleChoice />}
-      {text && <Text />}
-      {review && <Review />}
     </div>
   );
 };
