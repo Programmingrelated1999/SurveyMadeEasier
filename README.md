@@ -1,5 +1,3 @@
-# Crypto_Down
-
 ## Description
 
 Survey Applications
