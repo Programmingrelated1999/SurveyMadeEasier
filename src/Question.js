@@ -40,6 +40,15 @@ const Question = () => {
   //based on the question, render question type components
   return (
     <div className="question">
+      <ul>
+        {state.questions.map((question) => (
+          <li key={question.id}>
+            <strong>Name: </strong>
+            {question.name} <strong>Question Type: </strong>
+            {question.type}
+          </li>
+        ))}
+      </ul>
       Question
       <input
         type="text"
@@ -53,15 +62,6 @@ const Question = () => {
         <option value="agree_disagree">Agree/Disagree</option>
         <option value="review">Review</option>
       </select>
-      <ul>
-        {state.questions.map((question) => (
-          <li key={question.id}>
-            <strong>Name: </strong>
-            {question.name} <strong>Question Type: </strong>
-            {question.type}
-          </li>
-        ))}
-      </ul>
       {question === "text" ? <Text /> : null}
       {question === "multiple_choice" ? <MultipleChoice /> : null}
       {question === "agree_disagree" ? <AgreeDisagree /> : null}

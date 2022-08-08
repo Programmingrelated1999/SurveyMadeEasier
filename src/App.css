@@ -46,3 +46,7 @@
   background-size: 200%;
   transition: 1s ease-out;
 }
+
+ul {
+  list-style-type: none;
+}
