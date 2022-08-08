@@ -7,10 +7,17 @@ import Text from "./question_types/Text";
 //QUESTION TYPE
 const Question = () => {
   const [question, setQuestion] = useState("text");
+  const [questionName, setQuestionName] = useState("");
+
+  //on input change change the question name
+  const changeQuestionName = (event) => {
+    setQuestionName(event.target.value);
+  };
 
   //on submit change everything back to false
   const handleSubmit = (event) => {
     event.preventDefault();
+    setQuestionName("");
   };
 
   //set question type for checking condition in rendering the questions set up
@@ -24,7 +31,12 @@ const Question = () => {
   return (
     <div className="question">
       Question
-      <input type="text" name="question" />
+      <input
+        type="text"
+        name="question"
+        onChange={changeQuestionName}
+        value={questionName}
+      />
       <select value={question} onChange={handleQuestionType}>
         <option value="text">Text</option>
         <option value="multiple_choice">Multiple Choice</option>

@@ -1,12 +1,13 @@
 import React from "react";
 
+//Yes and No radio buttons returned
 const AgreeDisagree = () => {
   return (
     <div>
       <input type="radio" id="html" name="question" value="YES"></input>
-      <label for="html">YES</label>
+      <label htmlFor="html">YES</label>
       <input type="radio" id="html" name="question" value="NO"></input>
-      <label for="html">NO</label>
+      <label htmlFor="html">NO</label>
     </div>
   );
 };

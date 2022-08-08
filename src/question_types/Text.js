@@ -1,7 +1,7 @@
 import React from "react";
 
+//Text input
 const Text = () => {
-  //return <p>Text</p>;
   return (
     <div>
       <input type="text"></input>
