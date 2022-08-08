@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.button:hover {
+  background-position: left;
+}
+
+.button {
+  background: linear-gradient(to left, salmon 50%, lightblue 50%) right;
+  background-size: 200%;
+  transition: 1s ease-out;
+}

@@ -17,7 +17,9 @@ function App() {
   //if createForm is true, show the forms, else hides the form
   return (
     <div className="App">
-      <button onClick={changeCreateForm}>+ Create a form</button>
+      <button className="button" onClick={changeCreateForm}>
+        + Create a form
+      </button>
       {createForm ? <Form changeCreateForm={changeCreateForm} /> : null}
     </div>
   );
