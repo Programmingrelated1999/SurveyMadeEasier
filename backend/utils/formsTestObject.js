@@ -1,5 +1,4 @@
-//forms data for testing
-const forms = [
+let forms = [
   {
     name: "Form1",
     description: "Description1",
