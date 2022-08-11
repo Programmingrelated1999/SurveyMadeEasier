@@ -21,7 +21,7 @@ function App() {
 
   //RETURN
   //if createForm is true, show the forms, else hides the form
-  //shows the form created with the name, description, and the list of questions
+  //shows the formList with each form name, description, and the list of questions
   return (
     <div className="App">
       <button className="button" onClick={changeCreateForm}>
