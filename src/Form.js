@@ -39,6 +39,7 @@ const Form = ({ changeCreateForm }) => {
       createFormList({
         name: formTitle,
         description: formDescription,
+        questions: form.questions,
       })
     );
     dispatch(resetForm());

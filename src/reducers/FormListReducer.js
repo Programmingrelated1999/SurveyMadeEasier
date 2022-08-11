@@ -17,12 +17,13 @@ const FormListReducer = (state = initialState, action) => {
 
 //ACTION CREATORS
 //Action type is "name, description, questions and unique id added to the list"
-export const createFormList = ({ name, description }) => {
+export const createFormList = ({ name, description, questions }) => {
   return {
     type: "NEW_FORMLIST",
     data: {
       name,
       description,
+      questions,
       id: generateId(),
     },
   };

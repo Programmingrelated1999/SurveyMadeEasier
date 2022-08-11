@@ -34,6 +34,16 @@ function App() {
             <strong>Name: </strong>
             {form.name} <strong>Description: </strong>
             {form.description}
+            <ul>
+              {form.questions.map((question) => (
+                <li key={question.id}>
+                  <p>
+                    <strong>Question Name: </strong>
+                    {question.name}
+                  </p>
+                </li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>
