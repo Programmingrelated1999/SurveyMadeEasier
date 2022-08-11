@@ -2,6 +2,8 @@ import "./App.css";
 import { React, useState } from "react";
 import Form from "./Form";
 
+import { getAll } from "./services/formlist";
+
 //useSelector from Redux
 import { useSelector } from "react-redux";
 
@@ -24,6 +26,7 @@ function App() {
   //shows the formList with each form name, description, and the list of questions
   return (
     <div className="App">
+      {console.log(getAll())}
       <button className="button" onClick={changeCreateForm}>
         + Create a form
       </button>
