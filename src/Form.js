@@ -9,6 +9,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { createForm, resetForm } from "./reducers/FormReducer";
 import { createFormList } from "./reducers/FormListReducer";
 
+//postForm for connecting to backend
+import { postForm } from "./services/formlist";
+
+//RANDOM NUMBER generator for Id needs to be fixed
+const generateId = () => Number((Math.random() * 1000000).toFixed(0));
+
 const Form = ({ changeCreateForm }) => {
   //states
   const [formTitle, setFormTitle] = useState("");
@@ -31,17 +37,20 @@ const Form = ({ changeCreateForm }) => {
 
   //FUNCTIONS
   //handleSubmit function, call changeCreateForm which will set createForm value to opposite in App to close the form
-  const handleSubmit = (event) => {
+  //create a Form with the form title and form description
+  //createNewForm with the form title, description, questions, and id and then send it to post method.
+  const handleSubmit = async (event) => {
     event.preventDefault();
     changeCreateForm();
     dispatch(createForm({ name: formTitle, description: formDescription }));
-    dispatch(
-      createFormList({
-        name: formTitle,
-        description: formDescription,
-        questions: form.questions,
-      })
-    );
+    const id = generateId();
+    const newForm = await postForm({
+      name: formTitle,
+      description: formDescription,
+      questions: form.questions,
+      id: id,
+    });
+    dispatch(createFormList(newForm));
     dispatch(resetForm());
     setFormTitle("");
     setFormDescription("");
