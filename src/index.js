@@ -9,11 +9,13 @@ import { Provider } from "react-redux";
 import FormReducer from "./reducers/FormReducer";
 import FormListReducer from "./reducers/FormListReducer";
 
+//createFormList for adding formList for the initial state of the formList from backend
 import { createFormList } from "./reducers/FormListReducer";
 
 //for initializing getAll
 import { getAll } from "./services/formlist";
 
+//combineReducers
 const reducer = combineReducers({
   form: FormReducer,
   formList: FormListReducer,
@@ -22,6 +24,7 @@ const reducer = combineReducers({
 //create a store from the Form Reducer
 const store = createStore(reducer);
 
+//getAll gets the JSON of the GET method. For each item forms in the array, store it in initial states using dispatch method and calling createFormList
 getAll().then((forms) => {
   forms.forEach((form) => {
     store.dispatch(
