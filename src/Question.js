@@ -15,7 +15,7 @@ const Question = () => {
   const dispatch = useDispatch();
 
   //import all states from the store and set it to questions variable
-  const state = useSelector((state) => state);
+  const form = useSelector((state) => state.form);
 
   //on input change change the question name
   const changeQuestionName = (event) => {
@@ -41,7 +41,7 @@ const Question = () => {
   return (
     <div className="question">
       <ul>
-        {state.questions.map((question) => (
+        {form.questions.map((question) => (
           <li key={question.id}>
             <strong>Name: </strong>
             {question.name} <strong>Question Type: </strong>

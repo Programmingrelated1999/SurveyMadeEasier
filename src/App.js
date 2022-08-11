@@ -28,14 +28,12 @@ function App() {
         + Create a form
       </button>
       {createForm ? <Form changeCreateForm={changeCreateForm} /> : null}
-      <p>Form name: {state.name}</p>
-      <p>Form Description: {state.description}</p>
       <ul>
-        {state.questions.map((question) => (
-          <li key={question.id}>
+        {state.formList.map((form) => (
+          <li key={form.id}>
             <strong>Name: </strong>
-            {question.name} <strong>Question Type: </strong>
-            {question.type}
+            {form.name} <strong>Description: </strong>
+            {form.description}
           </li>
         ))}
       </ul>

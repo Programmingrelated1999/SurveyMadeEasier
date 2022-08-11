@@ -21,6 +21,8 @@ const FormReducer = (state = initialState, action) => {
     case "NEW_QUESTION":
       const newArray = [...state.questions, action.data];
       return { ...state, questions: newArray };
+    case "RESET_FORM":
+      return initialState;
     default:
       return state;
   }
@@ -37,6 +39,15 @@ export const createForm = ({ name, description }) => {
     },
   };
 };
+
+//reset Form which send "reset_form" type and no data which will reset the form
+export const resetForm = () => {
+  return {
+    type: "RESET_FORM",
+    data: {},
+  };
+};
+
 //create Question which takes the name and the type of the question and return the action object with type new question and action data
 export const createQuestion = ({ name, type }) => {
   return {

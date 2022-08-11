@@ -3,15 +3,18 @@ import Question from "./Question";
 import { useState } from "react";
 
 //Redux import
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 //action creators from reducers import
-import { createForm } from "./reducers/FormReducer";
+import { createForm, resetForm } from "./reducers/FormReducer";
+import { createFormList } from "./reducers/FormListReducer";
 
 const Form = ({ changeCreateForm }) => {
   //states
   const [formTitle, setFormTitle] = useState("");
   const [formDescription, setFormDescription] = useState("");
+
+  const form = useSelector((state) => state.form);
 
   //dispatch
   const dispatch = useDispatch();
@@ -32,6 +35,13 @@ const Form = ({ changeCreateForm }) => {
     event.preventDefault();
     changeCreateForm();
     dispatch(createForm({ name: formTitle, description: formDescription }));
+    dispatch(
+      createFormList({
+        name: formTitle,
+        description: formDescription,
+      })
+    );
+    dispatch(resetForm());
     setFormTitle("");
     setFormDescription("");
   };
