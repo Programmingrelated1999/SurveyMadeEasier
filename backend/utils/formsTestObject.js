@@ -1,3 +1,4 @@
+//forms
 let forms = [
   {
     name: "Form1",
@@ -28,4 +29,5 @@ let forms = [
   },
 ];
 
+//module exports
 module.exports = forms;

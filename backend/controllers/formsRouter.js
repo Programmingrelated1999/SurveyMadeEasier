@@ -1,17 +1,23 @@
 const formsRouter = require("express").Router();
-const { request } = require("http");
+const Forms = require("../models/forms");
+const Question = require("../models/question");
+
+//import data from utils forms and set it to forms
 let forms = require("../utils/formsTestObject");
 
 //GET ALL
 formsRouter.get("/", (request, response) => {
-  response.status(200).json(forms);
+  Forms.find({}).then((forms) => {
+    response.json(forms);
+  });
 });
 
 //GET SPECIFIC ID
-formsRouter.get("/:id", (request, response) => {
+formsRouter.get("/:id", async (request, response) => {
   //first have to convert to Number because request.params.id is a string and the id from forms is an integer. Comparing them with === results in false due to type differences.
-  const id = Number(request.params.id);
-  const form = forms.find((form) => form.id === id);
+  const id = request.params.id;
+  const form = await Forms.findById(id);
+  console.log(form);
   if (form) {
     response.json(form);
   } else {
@@ -21,19 +27,13 @@ formsRouter.get("/:id", (request, response) => {
 
 //POST method
 formsRouter.post("/", (request, response) => {
-  const id = Number((Math.random() * 1000000).toFixed(0));
-  const form = {
+  const form = new Forms({
     name: request.body.name,
     description: request.body.description,
-    questions: request.body.questions,
-    id: id,
-  };
-  if (form) {
+  });
+  form.save().then((form) => {
     response.json(form);
-    forms = forms.concat(form);
-  } else {
-    response.status(404).end();
-  }
+  });
 });
 
 //UPDATE
@@ -66,4 +66,5 @@ formsRouter.delete("/:id", (request, response) => {
   }
 });
 
+//export modules
 module.exports = formsRouter;
