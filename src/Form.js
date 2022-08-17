@@ -12,9 +12,6 @@ import { createFormList } from "./reducers/FormListReducer";
 //postForm for connecting to backend
 import { postForm } from "./services/formlist";
 
-//RANDOM NUMBER generator for Id needs to be fixed
-const generateId = () => Number((Math.random() * 1000000).toFixed(0));
-
 const Form = ({ changeCreateForm }) => {
   //states
   const [formTitle, setFormTitle] = useState("");
@@ -43,12 +40,10 @@ const Form = ({ changeCreateForm }) => {
     event.preventDefault();
     changeCreateForm();
     dispatch(createForm({ name: formTitle, description: formDescription }));
-    const id = generateId();
     const newForm = await postForm({
       name: formTitle,
       description: formDescription,
       questions: form.questions,
-      id: id,
     });
     dispatch(createFormList(newForm));
     dispatch(resetForm());
