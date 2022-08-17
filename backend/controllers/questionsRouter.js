@@ -2,9 +2,6 @@ const questionsRouter = require("express").Router();
 const Forms = require("../models/forms");
 const Questions = require("../models/question");
 
-//import data from utils questions and set it to questions
-let questions = require("../utils/formsTestObject");
-
 //GET ALL
 questionsRouter.get("/", (request, response) => {
   Questions.find({}).then((questions) => {
@@ -13,10 +10,10 @@ questionsRouter.get("/", (request, response) => {
 });
 
 //GET SPECIFIC ID
-questionsRouter.get("/:id", (request, response) => {
+questionsRouter.get("/:id", async (request, response) => {
   //first have to convert to Number because request.params.id is a string and the id from questions is an integer. Comparing them with === results in false due to type differences.
-  const id = Number(request.params.id);
-  const question = questions.find((question) => question.id === id);
+  const id = request.params.id;
+  const question = await Questions.findById(id);
   if (question) {
     response.json(question);
   } else {
@@ -44,34 +41,22 @@ questionsRouter.post("/", async (request, response) => {
 
 //UPDATE
 //create a new question from request.body. Goes through every questions and if the id matches update the question.
-questionsRouter.put("/:id", (request, response) => {
-  const id = Number(request.params.id);
-  const updatedForm = {
+questionsRouter.put("/:id", async (request, response) => {
+  const id = request.params.id;
+  const newQuestion = {
     name: request.body.name,
-    description: request.body.description,
-    questions: request.body.questions,
-    id: id,
+    type: request.body.type,
   };
-  questions = questions.map((question) =>
-    question.id === id ? updatedForm : question
-  );
-  if (questions) {
-    response.json(questions);
-  } else {
-    response.status(404).end();
-  }
+  const updatedQuestion = await Questions.findByIdAndUpdate(id, newQuestion);
+  response.json(updatedQuestion);
 });
 
 //DELETE
 //filter out the id with same id from request.params.id and set it to questions
-questionsRouter.delete("/:id", (request, response) => {
-  const id = Number(request.params.id);
-  questions = questions.filter((element) => element.id !== id);
-  if (questions) {
-    response.json(questions);
-  } else {
-    response.status(404).end();
-  }
+questionsRouter.delete("/:id", async (request, response) => {
+  const id = request.params.id;
+  const removedQuestion = await Questions.findByIdAndRemove(id);
+  response.json(removedQuestion);
 });
 
 //export modules

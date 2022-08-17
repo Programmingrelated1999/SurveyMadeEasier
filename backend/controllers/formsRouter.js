@@ -1,9 +1,5 @@
 const formsRouter = require("express").Router();
 const Forms = require("../models/forms");
-const Question = require("../models/question");
-
-//import data from utils forms and set it to forms
-let forms = require("../utils/formsTestObject");
 
 //GET ALL
 formsRouter.get("/", (request, response) => {
@@ -38,32 +34,23 @@ formsRouter.post("/", (request, response) => {
 
 //UPDATE
 //create a new form from request.body. Goes through every forms and if the id matches update the form.
-formsRouter.put("/:id", (request, response) => {
-  const id = Number(request.params.id);
-  const updatedForm = {
-    name: request.body.name,
-    description: request.body.description,
-    questions: request.body.questions,
-    id: id,
-  };
-  forms = forms.map((form) => (form.id === id ? updatedForm : form));
-  if (forms) {
-    response.json(forms);
-  } else {
-    response.status(404).end();
-  }
+formsRouter.put("/:id", async (request, response) => {
+  const id = request.params.id;
+  const form = await Forms.findById(id);
+  console.log("Form");
+  console.log(form);
+  form.name = request.body.name;
+  form.description = request.body.description;
+  const savedForm = await form.save();
+  response.json(savedForm);
 });
 
 //DELETE
 //filter out the id with same id from request.params.id and set it to forms
-formsRouter.delete("/:id", (request, response) => {
-  const id = Number(request.params.id);
-  forms = forms.filter((element) => element.id !== id);
-  if (forms) {
-    response.json(forms);
-  } else {
-    response.status(404).end();
-  }
+formsRouter.delete("/:id", async (request, response) => {
+  const id = request.params.id;
+  const removedForm = await Forms.findByIdAndRemove(id);
+  response.json(removedForm);
 });
 
 //export modules
