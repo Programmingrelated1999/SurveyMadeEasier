@@ -1,12 +1,13 @@
-import { FormControlUnstyledContext } from "@mui/base";
+//import
 import axios from "axios";
 
+//form and question base url
 const formUrl = "http://localhost:3001/api/forms/";
 const questionUrl = "http://localhost:3001/api/questions/";
 
+//getAll
 export const getAll = async () => {
   const response = await axios.get(formUrl);
-
   return response.data;
 };
 
@@ -17,7 +18,6 @@ export const postForm = async (content) => {
     name: content.name,
     description: content.description,
   });
-
   const questions = content.questions;
   await questions.forEach((question) => {
     axios.post(questionUrl, {

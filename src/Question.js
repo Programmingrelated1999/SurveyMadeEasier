@@ -73,4 +73,5 @@ const Question = () => {
   );
 };
 
+//EXPORT
 export default Question;

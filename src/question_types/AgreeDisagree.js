@@ -4,9 +4,15 @@ import React from "react";
 const AgreeDisagree = () => {
   return (
     <div>
-      <input type="radio" id="html" name="question" value="YES"></input>
+      <input
+        type="radio"
+        id="html"
+        name="question"
+        value="YES"
+        disabled
+      ></input>
       <label htmlFor="html">YES</label>
-      <input type="radio" id="html" name="question" value="NO"></input>
+      <input type="radio" id="html" name="question" value="NO" disabled></input>
       <label htmlFor="html">NO</label>
     </div>
   );

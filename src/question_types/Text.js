@@ -4,7 +4,7 @@ import React from "react";
 const Text = () => {
   return (
     <div>
-      <input type="text"></input>
+      <input type="text" disabled></input>
     </div>
   );
 };
