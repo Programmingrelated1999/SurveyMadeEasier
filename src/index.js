@@ -27,6 +27,7 @@ const store = createStore(reducer);
 //getAll gets the JSON of the GET method. For each item forms in the array, store it in initial states using dispatch method and calling createFormList
 getAll().then((forms) => {
   forms.forEach((form) => {
+    console.log(form.questions);
     store.dispatch(
       createFormList({
         name: form.name,

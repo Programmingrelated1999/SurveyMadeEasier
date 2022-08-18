@@ -3,17 +3,21 @@ const Forms = require("../models/forms");
 
 //GET ALL
 formsRouter.get("/", (request, response) => {
-  Forms.find({}).then((forms) => {
-    response.json(forms);
-  });
+  Forms.find({})
+    .populate("questions", { name: 1, type: 1 })
+    .then((forms) => {
+      response.json(forms);
+    });
 });
 
 //GET SPECIFIC ID
 formsRouter.get("/:id", async (request, response) => {
   //first have to convert to Number because request.params.id is a string and the id from forms is an integer. Comparing them with === results in false due to type differences.
   const id = request.params.id;
-  const form = await Forms.findById(id);
-  console.log(form);
+  const form = await Forms.findById(id).populate("questions", {
+    name: 1,
+    type: 1,
+  });
   if (form) {
     response.json(form);
   } else {
