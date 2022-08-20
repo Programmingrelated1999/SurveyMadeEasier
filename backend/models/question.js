@@ -12,6 +12,12 @@ const questionsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  choices: [
+    {
+      type: String,
+    },
+  ],
+  scores: {},
   form: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Form",

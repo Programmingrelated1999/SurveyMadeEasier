@@ -2,6 +2,7 @@ import "./App.css";
 import CreateForm from "./pages/CreateForm";
 import Home from "./pages/Home";
 import User from "./pages/User";
+import MyForms from "./pages/MyForms";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
@@ -13,11 +14,14 @@ function App() {
   return (
     <Router>
       <div>
-        <Link style={padding} to="/">
+        <Link style={padding} to="/home">
           HOME
         </Link>
         <Link style={padding} to="/create-form">
           CREATE A FORM
+        </Link>
+        <Link style={padding} to="/myforms">
+          MY FORMS
         </Link>
         <Link style={padding} to="/users">
           USER
@@ -26,8 +30,9 @@ function App() {
 
       <Routes>
         <Route path="/create-form" element={<CreateForm />} />
-        <Route path="/user" element={<User />} />
+        <Route path="/users" element={<User />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/myforms" element={<MyForms />} />
       </Routes>
     </Router>
   );

@@ -18,6 +18,11 @@ const formSchema = new mongoose.Schema({
       ref: "Question",
     },
   ],
+  votes: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
 });
 
 //setSchema

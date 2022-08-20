@@ -36,6 +36,15 @@ formsRouter.post("/", (request, response) => {
   });
 });
 
+//vote
+formsRouter.post("/:id/vote", async (request, response) => {
+  const id = request.params.id;
+  const form = await Forms.findById(id);
+  form.votes = form.votes + 1;
+  const savedForm = await form.save();
+  response.json(savedForm);
+});
+
 //UPDATE
 //create a new form from request.body. Goes through every forms and if the id matches update the form.
 formsRouter.put("/:id", async (request, response) => {

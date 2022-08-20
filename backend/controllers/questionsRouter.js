@@ -32,11 +32,49 @@ questionsRouter.post("/", async (request, response) => {
     type: request.body.type,
     form: form._id,
   });
+  switch (question.type) {
+    case "review":
+    case "text":
+      question.scores = [];
+      break;
+    case "multiple_choice":
+      const count = request.body.count;
+      question.scores = new Array(count).fill(0);
+      break;
+    case "agree_disagree":
+      question.scores = [0, 0];
+      break;
+  }
   const savedQuestion = await question.save();
   form.questions = form.questions.concat(savedQuestion._id);
   await form.save();
 
   response.json(savedQuestion);
+});
+
+//post vote
+questionsRouter.post("/:id/vote", async (request, response) => {
+  const id = request.params.id;
+  const question = await Questions.findById(id);
+  const newQuestion = {};
+  newQuestion.scores = question.scores;
+  let updatedQuestion = {};
+  switch (question.type) {
+    case "review":
+    case "text":
+      newQuestion.scores = newQuestion.scores.concat(request.body.result);
+      updatedQuestion = await Questions.findByIdAndUpdate(id, newQuestion);
+      break;
+    case "multiple_choice":
+    case "agree_disagree":
+      let choice = request.body.result;
+      newQuestion.scores[choice] = newQuestion.scores[choice] + 1;
+      updatedQuestion = await Questions.findByIdAndUpdate(id, newQuestion);
+      break;
+    default:
+      break;
+  }
+  response.status(201).json(updatedQuestion);
 });
 
 //UPDATE

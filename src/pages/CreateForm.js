@@ -1,15 +1,9 @@
 import { React, useState } from "react";
 import Form from "../Form";
 
-//useSelector from Redux
-import { useSelector } from "react-redux";
-
 const CreateForm = () => {
   //STATES
   const [createForm, setCreateForm] = useState(false);
-
-  //set state to the useSelector from store wrapped in Provider
-  const state = useSelector((state) => state);
 
   //FUNCTIONS
   //changes createForm to true or false.
@@ -26,25 +20,6 @@ const CreateForm = () => {
         + Create a form
       </button>
       {createForm ? <Form changeCreateForm={changeCreateForm} /> : null}
-      <ul>
-        {state.formList.map((form) => (
-          <li key={form.id}>
-            <strong>Name: </strong>
-            {form.name} <strong>Description: </strong>
-            {form.description}
-            <ul>
-              {form.questions.map((question) => (
-                <li key={question.id}>
-                  <p>
-                    <strong>Question Name: </strong>
-                    {question.name}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
