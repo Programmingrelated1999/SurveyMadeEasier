@@ -13,7 +13,7 @@ import FormListReducer from "./reducers/FormListReducer";
 import { createFormList } from "./reducers/FormListReducer";
 
 //for initializing getAll
-import { getAll } from "./services/formlist";
+import { getForms } from "./services/formlist";
 
 //combineReducers
 const reducer = combineReducers({
@@ -24,19 +24,7 @@ const reducer = combineReducers({
 //create a store from the Form Reducer
 const store = createStore(reducer);
 
-//getAll gets the JSON of the GET method. For each item forms in the array, store it in initial states using dispatch method and calling createFormList
-getAll().then((forms) => {
-  forms.forEach((form) => {
-    console.log(form.questions);
-    store.dispatch(
-      createFormList({
-        name: form.name,
-        description: form.description,
-        questions: form.questions,
-      })
-    );
-  });
-});
+getForms(store, createFormList);
 
 //create a Provider component which pass the store to the children component which is the APP
 const root = ReactDOM.createRoot(document.getElementById("root"));

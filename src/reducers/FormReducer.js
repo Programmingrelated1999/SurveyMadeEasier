@@ -5,9 +5,6 @@ const initialState = {
   questions: [],
 };
 
-//RANDOM NUMBER generator for Id needs to be fixed
-const generateId = () => Number((Math.random() * 1000000).toFixed(0));
-
 //Form Reducers
 //Action type is "New_Questions, append the new question to the state.question array"
 const FormReducer = (state = initialState, action) => {
@@ -49,13 +46,13 @@ export const resetForm = () => {
 };
 
 //create Question which takes the name and the type of the question and return the action object with type new question and action data
-export const createQuestion = ({ name, type }) => {
+export const createQuestion = ({ name, type, id }) => {
   return {
     type: "NEW_QUESTION",
     data: {
       name,
       type,
-      id: generateId(),
+      id,
     },
   };
 };

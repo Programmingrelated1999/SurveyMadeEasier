@@ -11,6 +11,8 @@ const Question = () => {
   const [question, setQuestion] = useState("text");
   const [questionName, setQuestionName] = useState("");
 
+  let temporary_id_for_rendering = 0;
+
   //dispatch variable storing useDispatch hook from react-redux which send actions to the the store wrapped
   const dispatch = useDispatch();
 
@@ -25,7 +27,14 @@ const Question = () => {
   //on submit submit question, reset questionName
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(createQuestion({ name: questionName, type: question }));
+    dispatch(
+      createQuestion({
+        name: questionName,
+        type: question,
+        id: temporary_id_for_rendering,
+      })
+    );
+    temporary_id_for_rendering += 1;
     setQuestionName("");
   };
 
