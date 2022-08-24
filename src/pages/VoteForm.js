@@ -10,12 +10,27 @@ import { getOneForm } from "../services/formlist";
 const VoteForm = () => {
   const { id } = useParams();
   const [form, setForm] = useState(null);
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState(null);
 
+  //useEffect to set the form
   useEffect(() => {
     getOneForm(id).then((result) => setForm(result));
   }, []);
 
+  //set a result object with id as key and answer as value
+  const changeResult = (id, answer) => {
+    const newResult = { ...result };
+    newResult[id] = answer;
+    setResult(newResult);
+  };
+
+  //clearResult
+  const clearResult = () => {
+    const newResult = {};
+    setResult(newResult);
+  };
+
+  //checking if form exists
   if (form) {
     console.log(form);
   }
@@ -27,18 +42,30 @@ const VoteForm = () => {
           <h1>{form.name}</h1>
           <h2>{form.description}</h2>
           {form.questions.map((question) => (
-            <>
-              <h5 key={question.id}>{question.name}</h5>
-              {question.type === "text" ? <TextVote /> : null}
-              {question.type === "review" ? <ReviewVote /> : null}
+            <div key={question.id}>
+              <h5>{question.name}</h5>
+              {question.type === "text" ? (
+                <TextVote changeResult={changeResult} id={question.id} />
+              ) : null}
+              {question.type === "review" ? (
+                <ReviewVote changeResult={changeResult} id={question.id} />
+              ) : null}
               {question.type === "agree_disagree" ? (
-                <AgreeDisagreeVote />
+                <AgreeDisagreeVote
+                  changeResult={changeResult}
+                  id={question.id}
+                />
               ) : null}
               {question.type === "multiple_choice" ? (
-                <MultipleChoiceVote />
+                <MultipleChoiceVote
+                  changeResult={changeResult}
+                  id={question.id}
+                />
               ) : null}
-            </>
+            </div>
           ))}
+          <button onClick={clearResult}>Submit</button>
+          {console.log(result)}
         </div>
       ) : (
         <p>Loading</p>
