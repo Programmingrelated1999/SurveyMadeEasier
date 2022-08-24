@@ -7,10 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { createQuestion } from "./reducers/FormReducer";
 
 //QUESTION TYPE
+//question is for question.type, questionName is for question.name, questionChoices is for question.choices
 const Question = () => {
   const [question, setQuestion] = useState("text");
   const [questionName, setQuestionName] = useState("");
+  const [questionChoices, setQuestionChoices] = useState([]);
 
+  //temporary id for rendering the list, does not get stored and transferred to backend.
   let temporary_id_for_rendering = 0;
 
   //dispatch variable storing useDispatch hook from react-redux which send actions to the the store wrapped
@@ -24,7 +27,11 @@ const Question = () => {
     setQuestionName(event.target.value);
   };
 
-  //on submit submit question, reset questionName
+  const submitChoices = (choices) => {
+    setQuestionChoices(choices);
+  };
+
+  //on submit submit question, reset questionName and questionChoices
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(
@@ -36,6 +43,7 @@ const Question = () => {
     );
     temporary_id_for_rendering += 1;
     setQuestionName("");
+    setQuestionChoices([]);
   };
 
   //set question type for checking condition in rendering the questions set up
@@ -72,7 +80,12 @@ const Question = () => {
         <option value="review">Review</option>
       </select>
       {question === "text" ? <Text /> : null}
-      {question === "multiple_choice" ? <MultipleChoice /> : null}
+      {question === "multiple_choice" ? (
+        <MultipleChoice
+          submitChoices={submitChoices}
+          questionChoices={questionChoices}
+        />
+      ) : null}
       {question === "agree_disagree" ? <AgreeDisagree /> : null}
       {question === "review" ? <Review /> : null}
       <button type="button" onClick={handleSubmit}>

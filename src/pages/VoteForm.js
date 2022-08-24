@@ -37,6 +37,7 @@ const VoteForm = () => {
     console.log(form);
   }
 
+  //renders form name, description and the list of questions. Based on question type render different vote components
   return (
     <div>
       {form ? (
