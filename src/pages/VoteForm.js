@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import MultipleChoiceVote from "../question_vote.js/MultipleChoiceVote";
 import AgreeDisagreeVote from "../question_vote.js/AgreeDisagreeVote";
 import TextVote from "../question_vote.js/TextVote";
@@ -8,6 +8,7 @@ import ReviewVote from "../question_vote.js/ReviewVote";
 import { getOneForm } from "../services/formlist";
 
 const VoteForm = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [form, setForm] = useState(null);
   const [result, setResult] = useState(null);
@@ -25,9 +26,10 @@ const VoteForm = () => {
   };
 
   //clearResult
-  const clearResult = () => {
+  const handleSubmit = () => {
     const newResult = {};
     setResult(newResult);
+    navigate("/home");
   };
 
   //checking if form exists
@@ -64,7 +66,7 @@ const VoteForm = () => {
               ) : null}
             </div>
           ))}
-          <button onClick={clearResult}>Submit</button>
+          <button onClick={handleSubmit}>Submit</button>
           {console.log(result)}
         </div>
       ) : (
