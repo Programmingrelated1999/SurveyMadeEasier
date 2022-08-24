@@ -4,7 +4,10 @@ import { React } from "react";
 import { useSelector } from "react-redux";
 
 //getOneForm axios
-import { getOneForm } from "../services/formlist";
+import { getOneForm } from "../../services/formlist";
+
+//Routers
+import { Link } from "react-router-dom";
 
 //Home React Function
 const Home = () => {
@@ -24,7 +27,7 @@ const Home = () => {
             {form.name} <strong>Description: </strong>
             {form.description}
             <button onClick={vote} value={form.id}>
-              Vote
+              <Link to={`/vote/${form.id}`}>Vote</Link>
             </button>
           </li>
         ))}

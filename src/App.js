@@ -1,8 +1,8 @@
 import "./App.css";
-import CreateForm from "./pages/CreateForm";
-import Home from "./pages/Home";
-import User from "./pages/User";
-import MyForms from "./pages/MyForms";
+import CreateForm from "./pages/navigation_links/CreateForm";
+import Home from "./pages/navigation_links/Home";
+import User from "./pages/navigation_links/User";
+import MyForms from "./pages/navigation_links/MyForms";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
