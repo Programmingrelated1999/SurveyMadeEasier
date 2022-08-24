@@ -3,6 +3,7 @@ import CreateForm from "./pages/navigation_links/CreateForm";
 import Home from "./pages/navigation_links/Home";
 import User from "./pages/navigation_links/User";
 import MyForms from "./pages/navigation_links/MyForms";
+import VoteForm from "./pages/VoteForm";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/users" element={<User />} />
         <Route path="/home" element={<Home />} />
         <Route path="/myforms" element={<MyForms />} />
+        <Route path="/vote/:id" element={<VoteForm />} />
       </Routes>
     </Router>
   );
