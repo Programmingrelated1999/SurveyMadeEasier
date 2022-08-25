@@ -46,13 +46,14 @@ export const resetForm = () => {
 };
 
 //create Question which takes the name and the type of the question and return the action object with type new question and action data
-export const createQuestion = ({ name, type, id }) => {
+export const createQuestion = ({ name, type, id, choices }) => {
   return {
     type: "NEW_QUESTION",
     data: {
       name,
       type,
       id,
+      choices,
     },
   };
 };

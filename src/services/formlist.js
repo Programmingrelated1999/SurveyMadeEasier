@@ -32,6 +32,7 @@ export const postForm = async (content) => {
       name: question.name,
       type: question.type,
       formId: newForm.data.id,
+      choices: question.choices,
     });
   });
   return newForm.data;

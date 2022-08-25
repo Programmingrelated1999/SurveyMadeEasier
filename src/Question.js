@@ -35,11 +35,13 @@ const Question = () => {
   //on submit submit question, reset questionName and questionChoices
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(questionChoices);
     dispatch(
       createQuestion({
         name: questionName,
         type: question,
         id: temporary_id_for_rendering,
+        choices: questionChoices,
       })
     );
     temporary_id_for_rendering += 1;

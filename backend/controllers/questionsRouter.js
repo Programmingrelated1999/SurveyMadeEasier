@@ -31,6 +31,7 @@ questionsRouter.post("/", async (request, response) => {
     name: request.body.name,
     type: request.body.type,
     form: form._id,
+    choices: request.body.choices,
   });
   switch (question.type) {
     case "review":
