@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 
 //Multiple Choice with checkboxes of choices
-const MultipleChoice = ({ submitChoices }) => {
-  //questionChoices to store array of choice and list them, length to store array of lengths, choice to store the current choice being edited.
-  const [questionChoices, setQuestionChoices] = useState([]);
+const MultipleChoice = ({ questionChoices, addChoice }) => {
   const [length, setLength] = useState(questionChoices.length);
   const [choice, setChoice] = useState("");
 
@@ -18,11 +16,12 @@ const MultipleChoice = ({ submitChoices }) => {
     event.preventDefault();
     const newLength = length + 1;
     setLength(newLength);
-    const newChoiceList = questionChoices.concat(choice);
-    setQuestionChoices(newChoiceList);
+    addChoice(choice);
     setChoice("");
   };
 
+  //renders the questions with the index key starting from 1
+  //ask to fill in the multiple choice name and have the option to add the question
   return (
     <div>
       <ul>
@@ -41,4 +40,5 @@ const MultipleChoice = ({ submitChoices }) => {
   );
 };
 
+//export
 export default MultipleChoice;

@@ -27,8 +27,9 @@ const Question = () => {
     setQuestionName(event.target.value);
   };
 
-  const submitChoices = (choices) => {
-    setQuestionChoices(choices);
+  const addChoice = (choice) => {
+    const newChoiceList = questionChoices.concat(choice);
+    setQuestionChoices(newChoiceList);
   };
 
   //on submit submit question, reset questionName and questionChoices
@@ -82,8 +83,8 @@ const Question = () => {
       {question === "text" ? <Text /> : null}
       {question === "multiple_choice" ? (
         <MultipleChoice
-          submitChoices={submitChoices}
           questionChoices={questionChoices}
+          addChoice={addChoice}
         />
       ) : null}
       {question === "agree_disagree" ? <AgreeDisagree /> : null}
