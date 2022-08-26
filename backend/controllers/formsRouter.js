@@ -17,6 +17,8 @@ formsRouter.get("/:id", async (request, response) => {
   const form = await Forms.findById(id).populate("questions", {
     name: 1,
     type: 1,
+    choices: 1,
+    data: 1,
   });
   if (form) {
     response.json(form);

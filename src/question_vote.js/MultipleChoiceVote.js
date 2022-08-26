@@ -1,17 +1,19 @@
 import React from "react";
 
 //Multiple Choice with checkboxes of choices
-const MultipleChoiceVote = () => {
+const MultipleChoiceVote = ({ choices, changeResult, id }) => {
+  const setInput = (event) => {
+    event.preventDefault();
+    changeResult(id, event.target.value);
+  };
+
   return (
     <div>
-      <input type="checkbox" name="pets" value="Choice A" /> Choice A
-      <br />
-      <input type="checkbox" name="pets" value="Choice B" /> Choice B
-      <br />
-      <input type="checkbox" name="pets" value="Choice C" /> Choice C
-      <br />
-      <input type="checkbox" name="pets" value="Choice D" /> Choice D
-      <br />
+      {choices.map((choice, index) => (
+        <div key={index}>
+          <input type="checkbox" value={choice} onClick={setInput} /> {choice}
+        </div>
+      ))}
     </div>
   );
 };

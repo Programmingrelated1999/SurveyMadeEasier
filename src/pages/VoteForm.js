@@ -63,12 +63,13 @@ const VoteForm = () => {
                 <MultipleChoiceVote
                   changeResult={changeResult}
                   id={question.id}
+                  choices={question.choices}
                 />
               ) : null}
             </div>
           ))}
           <button onClick={handleSubmit}>Submit</button>
-          {console.log(result)}
+          {/*console.log(result)*/}
         </div>
       ) : (
         <p>Loading</p>
